@@ -7,7 +7,7 @@
         public bool SupportsDtc => false;
         public bool SupportsCrossQueueTransactions => true;
         public bool SupportsNativePubSub => true;
-        public bool SupportsNativeDeferral => false;
+        public bool SupportsNativeDeferral => true;
         public bool SupportsOutbox => true;
         public IConfigureEndpointTestExecution TransportConfiguration => new ConfigureEndpointDevelopmentTransport();
         public IConfigureEndpointTestExecution PersistenceConfiguration => new ConfigureEndpointInMemoryPersistence();

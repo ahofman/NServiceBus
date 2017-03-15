@@ -46,7 +46,11 @@
         {
             public RetryEndpoint()
             {
-                EndpointSetup<DefaultServer>((config, context) => { config.ConfigureTransport().Transactions(TransportTransactionMode.None); });
+                EndpointSetup<DefaultServer>((config, context) =>
+                {
+                    config.LimitMessageProcessingConcurrencyTo(1); //to ensure sequential processing
+                    config.ConfigureTransport().Transactions(TransportTransactionMode.None);
+                });
             }
 
             class MessageToBeRetriedHandler : IHandleMessages<MessageToBeRetried>

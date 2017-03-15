@@ -6,10 +6,10 @@
     using EndpointTemplates;
     using NUnit.Framework;
 
-    public class When_immediate_retries_with_default_settings : NServiceBusAcceptanceTest
+    public class When_immediate_retries_with_no_transaction : NServiceBusAcceptanceTest
     {
         [Test]
-        public async Task Should_not_do_any_retries_if_transactions_are_off()
+        public async Task Should_move_message_to_error_queue()
         {
             var context = await Scenario.Define<Context>(c => { c.Id = Guid.NewGuid(); })
                 .WithEndpoint<RetryEndpoint>(b => b
@@ -30,6 +30,7 @@
                 .Run();
 
             Assert.AreEqual(1, context.NumberOfTimesInvoked, "No retries should be in use if transactions are off");
+            Assert.AreEqual(1, context.FailedMessages.Count, "Message should go to error");
         }
 
         public class Context : ScenarioContext

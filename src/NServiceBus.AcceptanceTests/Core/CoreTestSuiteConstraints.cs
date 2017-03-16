@@ -10,6 +10,6 @@
         public bool SupportsNativeDeferral => false;
         public bool SupportsOutbox => true;
         public IConfigureEndpointTestExecution TransportConfiguration => new ConfigureEndpointMsmqTransport();
-        public IConfigureEndpointTestExecution PersistenceConfiguration => new ConfigureEndpointInMemoryPersistence();
+        public IConfigureEndpointTestExecution PersistenceConfiguration => new ConfigureEndpointDevelopmentPersistence();
     }
 }
